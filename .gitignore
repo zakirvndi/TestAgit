@@ -482,7 +482,10 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+<<<<<<< HEAD
 
 # Sensitive config
 appsettings.json
 appsettings.*.json
+=======
+>>>>>>> parent of 1adbf36 (Revert "first commit")
