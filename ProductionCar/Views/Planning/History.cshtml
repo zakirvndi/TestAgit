@@ -1,0 +1,40 @@
+﻿@model List<ProductionCar.Models.PlanningHeader>
+@{
+    ViewData["Title"] = "History Planning";
+}
+
+<h2>History Rencana Produksi</h2>
+<a href="/Planning" class="btn btn-primary mb-3">Input Baru</a>
+
+@foreach (var h in Model)
+{
+    <div class="card mb-3" style="max-width:650px">
+        <div class="card-header">
+            <strong>ID #@h.PlanningID</strong> — @h.CreatedAt.ToString("dd MMM yyyy HH:mm")
+            | Total: <strong>@h.TotalProduction mobil</strong> | Hari Aktif: <strong>@h.TotalActiveDays</strong>
+        </div>
+        <div class="card-body p-2">
+            <table class="table table-sm table-bordered mb-0">
+                <thead>
+                    <tr>
+                        <th>Hari</th>
+                        <th>Planning Asep</th>
+                        <th>Hasil</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in h.Details)
+                    {
+                        <tr class="@(d.IsHoliday ? "table-secondary" : "")">
+                            <td>@d.DayName</td>
+                            <td>@d.OriginalPlanning</td>
+                            <td>@(d.IsHoliday ? "-" : d.DistributedPlanning.ToString())</td>
+                            <td>@(d.IsHoliday ? "🔴 Libur" : "✅ Aktif")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
